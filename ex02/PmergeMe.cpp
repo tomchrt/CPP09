@@ -105,9 +105,7 @@ std::vector<int> PmergeMe::fordJohnsonVector(const std::vector<int>& input) {
         last = input[i];
         has_last = true;
     }
-    // Tri récursif de la main_chain
     main_chain = fordJohnsonVector(main_chain);
-    // Insertion des pending dans main_chain selon Jacobsthal
     std::vector<size_t> jacob = jacobsthalSequence(pending.size());
     std::vector<bool> inserted(pending.size(), false);
     for (size_t k = 0; k < jacob.size(); ++k) {
@@ -115,25 +113,13 @@ std::vector<int> PmergeMe::fordJohnsonVector(const std::vector<int>& input) {
         if (idx >= pending.size() || inserted[idx]) continue;
         int value = pending[idx];
         std::vector<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
-        std::cout << "[DEBUG] Inserting pending[" << idx << "]=" << value << " into main_chain at pos " << (pos - main_chain.begin()) << std::endl;
         main_chain.insert(pos, value);
         inserted[idx] = true;
-        std::cout << "[DEBUG] main_chain after insert :";
-        for (size_t j = 0; j < main_chain.size(); ++j) std::cout << " " << main_chain[j];
-        std::cout << std::endl;
     }
-    // Ajouter l'élément impair à la fin si besoin
     if (has_last) {
         std::vector<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), last);
-        std::cout << "[DEBUG] Inserting last=" << last << " into main_chain at pos " << (pos - main_chain.begin()) << std::endl;
         main_chain.insert(pos, last);
-        std::cout << "[DEBUG] main_chain after last   :";
-        for (size_t j = 0; j < main_chain.size(); ++j) std::cout << " " << main_chain[j];
-        std::cout << std::endl;
     }
-    std::cout << "[DEBUG] main_chain (final):";
-    for (size_t j = 0; j < main_chain.size(); ++j) std::cout << " " << main_chain[j];
-    std::cout << std::endl;
     return main_chain;
 }
 
@@ -160,9 +146,7 @@ std::deque<int> PmergeMe::fordJohnsonDeque(const std::deque<int>& input) {
         last = input[i];
         has_last = true;
     }
-    // Tri récursif de la main_chain
     main_chain = fordJohnsonDeque(main_chain);
-    // Insertion des pending dans main_chain selon Jacobsthal
     std::vector<size_t> jacob = jacobsthalSequence(pending.size());
     std::vector<bool> inserted(pending.size(), false);
     for (size_t k = 0; k < jacob.size(); ++k) {
@@ -170,24 +154,12 @@ std::deque<int> PmergeMe::fordJohnsonDeque(const std::deque<int>& input) {
         if (idx >= pending.size() || inserted[idx]) continue;
         int value = pending[idx];
         std::deque<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
-        std::cout << "[DEBUG][deque] Inserting pending[" << idx << "]=" << value << " into main_chain at pos " << (pos - main_chain.begin()) << std::endl;
         main_chain.insert(pos, value);
         inserted[idx] = true;
-        std::cout << "[DEBUG][deque] main_chain after insert :";
-        for (size_t j = 0; j < main_chain.size(); ++j) std::cout << " " << main_chain[j];
-        std::cout << std::endl;
     }
-    // Ajouter l'élément impair à la fin si besoin
     if (has_last) {
         std::deque<int>::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), last);
-        std::cout << "[DEBUG][deque] Inserting last=" << last << " into main_chain at pos " << (pos - main_chain.begin()) << std::endl;
         main_chain.insert(pos, last);
-        std::cout << "[DEBUG][deque] main_chain after last   :";
-        for (size_t j = 0; j < main_chain.size(); ++j) std::cout << " " << main_chain[j];
-        std::cout << std::endl;
     }
-    std::cout << "[DEBUG][deque] main_chain (final):";
-    for (size_t j = 0; j < main_chain.size(); ++j) std::cout << " " << main_chain[j];
-    std::cout << std::endl;
     return main_chain;
 } 
