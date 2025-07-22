@@ -10,6 +10,8 @@ int main(int argc, char* argv[]) {
     try {
         PmergeMe pm(argc, argv);
         pm.printOriginal();
+        pm.sortAndPrint();
+        pm.sortAndTime();
     } catch (const std::exception& e) {
         std::cerr << "Error" << std::endl;
         return 1;
