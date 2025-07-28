@@ -23,7 +23,7 @@ static bool isValidDate(const std::string& date) {
         return false;
     if (y < 2009 || m < 1 || m > 12 || d < 1 || d > 31)
         return false;
-    // Simple check, not exhaustive (doesn't check for leap years, etc.)
+
     return true;
 }
 
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     BitcoinExchange btc("data.csv");
 
     std::string line;
-    std::getline(input, line); // skip header
+    std::getline(input, line);
     while (std::getline(input, line)) {
         if (line.empty() || trim(line).empty())
             continue;
