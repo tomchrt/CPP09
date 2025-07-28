@@ -7,8 +7,12 @@
 class RPN {
 public:
     RPN();
+    RPN(const RPN& other);
     ~RPN();
+    
+    RPN& operator=(const RPN& other);
+    
     int evaluate(const std::string& expr);
 };
 
-#endif // RPN_HPP 
+#endif 
