@@ -7,14 +7,14 @@
 RPN::RPN() {}
 
 RPN::RPN(const RPN& other) {
-    (void)other; // Constructeur de copie vide car pas d'attributs à copier
+    (void)other;
 }
 
 RPN::~RPN() {}
 
 RPN& RPN::operator=(const RPN& other) {
     if (this != &other) {
-        (void)other; // Opérateur d'assignation vide car pas d'attributs à copier
+        (void)other;
     }
     return *this;
 }

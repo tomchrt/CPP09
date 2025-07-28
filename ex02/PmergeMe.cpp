@@ -1,9 +1,6 @@
 #include "PmergeMe.hpp"
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <algorithm>
-#include <ctime>
+
+
 
 PmergeMe::PmergeMe(int argc, char* argv[]) {
     for (int i = 1; i < argc; ++i) {
@@ -18,7 +15,18 @@ PmergeMe::PmergeMe(int argc, char* argv[]) {
     }
 }
 
+PmergeMe::PmergeMe(const PmergeMe& other) : _vec(other._vec), _deq(other._deq) {
+}
+
 PmergeMe::~PmergeMe() {}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
+    if (this != &other) {
+        _vec = other._vec;
+        _deq = other._deq;
+    }
+    return *this;
+}
 
 void PmergeMe::printOriginal() const {
     std::cout << "Before:";
@@ -61,7 +69,6 @@ void PmergeMe::sortAndTime() {
 const std::vector<int>& PmergeMe::getVector() const { return _vec; }
 const std::deque<int>& PmergeMe::getDeque() const { return _deq; }
 
-// Génère la suite de Jacobsthal jusqu'à n (exclu)
 static std::vector<size_t> jacobsthalSequence(size_t n) {
     std::vector<size_t> seq;
     if (n == 0) return seq;
@@ -74,7 +81,6 @@ static std::vector<size_t> jacobsthalSequence(size_t n) {
         j2 = j1;
         j1 = next;
     }
-    // Compléter avec les indices manquants
     for (size_t i = 1; i <= n; ++i) {
         if (std::find(seq.begin(), seq.end(), i) == seq.end())
             seq.push_back(i);

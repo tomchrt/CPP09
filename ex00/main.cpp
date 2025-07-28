@@ -1,11 +1,5 @@
 #include "BitcoinExchange.hpp"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <cstdlib>
-#include <limits>
-#include <cctype>
+
 
 static std::string trim(const std::string& s) {
     size_t start = 0;
