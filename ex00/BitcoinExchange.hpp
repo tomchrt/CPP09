@@ -7,16 +7,17 @@
 class BitcoinExchange {
 public:
     BitcoinExchange(const std::string& dbFile);
+    BitcoinExchange(const BitcoinExchange& other);
     ~BitcoinExchange();
+    
+    BitcoinExchange& operator=(const BitcoinExchange& other);
 
-    // Charge la base de données CSV des taux de change
     void loadDatabase(const std::string& dbFile);
 
-    // Retourne le taux de change pour une date (ou la date précédente la plus proche)
     float getRateForDate(const std::string& date) const;
 
 private:
-    std::map<std::string, float> _rates; // date -> taux
+    std::map<std::string, float> _rates;
 };
 
-#endif // BITCOINEXCHANGE_HPP 
+#endif 

@@ -8,7 +8,17 @@ BitcoinExchange::BitcoinExchange(const std::string& dbFile) {
     loadDatabase(dbFile);
 }
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : _rates(other._rates) {
+}
+
 BitcoinExchange::~BitcoinExchange() {}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
+    if (this != &other) {
+        _rates = other._rates;
+    }
+    return *this;
+}
 
 void BitcoinExchange::loadDatabase(const std::string& dbFile) {
     std::ifstream db(dbFile.c_str());
@@ -17,7 +27,7 @@ void BitcoinExchange::loadDatabase(const std::string& dbFile) {
         return;
     }
     std::string line;
-    std::getline(db, line); // skip header
+    std::getline(db, line);
     while (std::getline(db, line)) {
         std::istringstream iss(line);
         std::string date, rateStr;
